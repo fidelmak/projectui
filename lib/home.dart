@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-Future<void> fetchData() async {
-  var url = Uri.parse(
-      'https://646b7d727d3c1cae4ce3e29f.mockapi.io/api/vi/transactions');
-  var response = await http.get(url);
-
-  if (response.statusCode == 200) {
-    // Request successful, parse the JSON response
-    var jsonData = json.decode(response.body);
-    // Process the data as needed
-    print(jsonData);
-  } else {
-    // Request failed
-    print('Request failed with status: ${response.statusCode}.');
-  }
-  fetchData();
-}
+import 'apiCall.dart';
+import 'model.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -27,16 +11,29 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Apss'),
-      ),
-      body: Center(
-        child: Text(
-          'dummy text',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
+    return FutureBuilder<List<Transaction>>(
+      future: fetchData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          List<Transaction> transactions = snapshot.data!;
+          return ListView.builder(
+            itemCount: transactions.length,
+            itemBuilder: (context, index) {
+              Transaction transaction = transactions[index];
+              return ExpansionTile(
+                title: Text(transaction.name),
+                children: [
+                  // Add any additional content you want to display
+                ],
+              );
+            },
+          );
+        }
+      },
     );
   }
 }
