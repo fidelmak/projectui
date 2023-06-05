@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        
+        {
+            "name": "Flutter (scratch.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "scratch.dart"
+        }
+    ]
+}
