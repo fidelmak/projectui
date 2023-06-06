@@ -32,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String myMargin = "1";
+    String myMargin = "abs";
     double? mymarginDouble;
 
     try {
