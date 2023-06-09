@@ -17,7 +17,7 @@ class _LocationScreenState extends State<LocationScreen> {
   late String weatherupdate;
   late String cityName;
   late String weatherMessg;
-
+  WeatherModel weather = WeatherModel();
   @override
   void initState() {
     super.initState();
@@ -25,8 +25,6 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void updateUi(dynamic weatherData) {
-    WeatherModel weather = WeatherModel();
-
     double temp = weatherData["main"]["temp"];
     temperature = temp.toInt();
     var condition = weatherData["weather"][0]["id"];
@@ -56,10 +54,14 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await weather.getLocationWeather();
+                      updateUi(weatherData);
+                      print("did't return");
+                    },
                     child: Icon(
                       Icons.near_me,
-                      color: Colors.white,
+                      color: Colors.red,
                       size: 50.0,
                     ),
                   ),

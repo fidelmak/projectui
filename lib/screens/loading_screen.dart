@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:projectui/screens/location_screen.dart';
 //import 'package:geolocator/geolocator.dart';
-import '../services/location.dart';
-import '../services/networking.dart';
-import 'export.dart';
+import '../services/weather.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -19,17 +17,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocationData() async {
-    double latitude;
-    double longitude;
-    //LocationPermission permission = await Geolocator.requestPermission();
-    Location getlocate = Location();
-    await getlocate.getLocal();
-    latitude = getlocate.latitude;
-    longitude = getlocate.longitude;
+    WeatherModel weathermodel = WeatherModel();
+    var weatherData = await weathermodel.getLocationWeather();
 
-    Networkhelper networkhelper = Networkhelper(urlData);
-
-    var weatherData = await networkhelper.getData();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LocationScreen(
         locationWeather: weatherData,
