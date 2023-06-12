@@ -37,9 +37,13 @@ class _CityScreenState extends State<CityScreen> {
                 padding: EdgeInsets.all(20.0),
                 child: TextField(
                   decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      icon: Icon(Icons.location_city_outlined)),
+                    filled: true,
+                    fillColor: Colors.white,
+                    icon: Icon(
+                      Icons.location_city_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
               TextButton(
