@@ -27,14 +27,20 @@ class _CityScreenState extends State<CityScreen> {
                 child: TextButton(
                   onPressed: () {},
                   child: Icon(
-                    Icons.arrow_back_ios,
+                    Icons.arrow_back_rounded,
+                    color: Colors.white,
                     size: 50.0,
                   ),
                 ),
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      icon: Icon(Icons.location_city_outlined)),
+                ),
               ),
               TextButton(
                 onPressed: () {},
